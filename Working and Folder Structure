@@ -1,0 +1,5 @@
+Utils.py is the file containing all the functions for both the backend and frontend.
+Console.main is the file using these functions and running the code.
+KEEP THESE TWO FILES IN THE MAIN FOLDER....
+Create a new folder in the same folder as these two folders named as "templates" and then a new folder inside the template folder name as "cv_designs" and save all the html files (cv templates) in this.
+Create a new folder named as "generated_cvs" in the main directory to store the generated CVs.
