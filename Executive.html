@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }} - Executive Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        body { margin: 0; padding: 0; font-family: 'Open Sans', sans-serif; background: #eef1f5; color: #333; }
+        .page { width: 210mm; min-height: 297mm; margin: 40px auto; background: white; display: flex; box-shadow: 0 15px 35px rgba(0,0,0,0.15); overflow: hidden; }
+        
+        /* Sidebar Styling */
+        .sidebar { width: 32%; background-color: #1e293b; color: white; padding: 40px 30px; display: flex; flex-direction: column; gap: 30px; }
+        
+        .profile-img { 
+            width: 150px; height: 150px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 4px solid #d97706; 
+            margin: 0 auto 20px; 
+            display: block; 
+            background: #fff;
+        }
+
+        .sidebar-section h3 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 14px; letter-spacing: 2px; border-bottom: 1px solid #475569; padding-bottom: 10px; margin-bottom: 20px; color: #d97706; }
+        .contact-item { margin-bottom: 15px; font-size: 13px; display: flex; align-items: center; gap: 12px; opacity: 0.9; }
+        .contact-icon { width: 28px; height: 28px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        
+        /* Education & GPA */
+        .edu-block { margin-bottom: 25px; }
+        .edu-degree { font-weight: 700; color: #fff; font-size: 15px; margin-bottom: 2px;}
+        .edu-uni { color: #94a3b8; font-size: 13px; }
+        .gpa-badge { display: inline-block; background: #d97706; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-top: 5px; }
+
+        /* Skills */
+        .skill-container { margin-bottom: 15px; }
+        .skill-text { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; font-weight: 600; }
+        .progress-bar { width: 100%; height: 6px; background: #334155; border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; background: #d97706; width: 85%; }
+        
+        /* Main Content */
+        .main-content { width: 68%; padding: 50px 40px; }
+        .header-name { font-family: 'Montserrat', sans-serif; font-size: 42px; font-weight: 700; color: #1e293b; text-transform: uppercase; line-height: 1; margin: 0; }
+        .header-role { font-family: 'Montserrat', sans-serif; font-size: 18px; color: #d97706; font-weight: 600; margin-top: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        .summary-box { margin-top: 30px; background: #f8fafc; border-left: 4px solid #d97706; padding: 20px; font-style: italic; color: #475569; line-height: 1.6; border-radius: 0 8px 8px 0; }
+        
+        .main-section { margin-top: 40px; }
+        .section-title { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .section-title::after { content: ''; flex: 1; height: 2px; background: #e2e8f0; }
+        
+        .timeline-item { position: relative; padding-left: 30px; margin-bottom: 30px; border-left: 2px solid #e2e8f0; }
+        .timeline-item::before { content: ''; position: absolute; left: -6px; top: 0; width: 10px; height: 10px; background: #d97706; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 2px #d97706; }
+        
+        .job-head { display: flex; justify-content: space-between; align-items: baseline; }
+        .job-title { font-weight: 700; font-size: 16px; color: #1e293b; }
+        .job-date { font-size: 12px; color: #64748b; font-weight: 600; background: #f1f5f9; padding: 4px 10px; border-radius: 20px; }
+        .job-company { font-size: 14px; color: #d97706; font-weight: 600; margin-top: 4px; }
+        .job-desc { margin-top: 10px; font-size: 14px; color: #475569; line-height: 1.6; }
+        
+        .tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag { background: #e2e8f0; color: #334155; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; transition: background 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <aside class="sidebar">
+            <img src="{{ filename }}" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #d97706; margin: 0 auto 20px; display: block; background: #fff;">
+            
+            <div class="sidebar-section">
+                <h3>Contact Info</h3>
+                <div class="contact-item"><span class="contact-icon">📞</span> {{ phone }}</div>
+                <div class="contact-item"><span class="contact-icon">📧</span> {{ email }}</div>
+                <div class="contact-item"><span class="contact-icon">📍</span> {{ city }}</div>
+            </div>
+            <div class="sidebar-section">
+                <h3>Education</h3>
+                <div class="edu-block">
+                    <div class="edu-degree">{{ degree }}</div>
+                    <div class="edu-uni">{{ university }}</div>
+                    <span class="gpa-badge">CGPA: {{ gpa }}</span>
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <h3>Expertise</h3>
+                {% for skill in skills %}
+                <div class="skill-container">
+                    <div class="skill-text"><span>{{ skill }}</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 80%;"></div></div>
+                </div>
+                {% endfor %}
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <h1 class="header-name">{{ name }}</h1>
+            <div class="header-role">{{ job_title }}</div>
+            <div class="summary-box">"{{ summary }}"</div>
+
+            <div class="main-section">
+                <div class="section-title">Professional Experience</div>
+                
+                <div class="timeline-item">
+                    <div class="job-head">
+                        <span class="job-title">{{ job_title }}</span>
+                        <span class="job-date">{{ current_date }}</span>
+                    </div>
+                    <div class="job-company">Current Company</div>
+                    <div class="job-desc">
+                        {{ level }} professional with {{ years_exp }} years of experience. 
+                        Demonstrated ability to handle complex tasks using {{ skills[0] if skills else 'Programming' }}.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="job-head">
+                        <span class="job-title">{{ prev_title }}</span>
+                        <span class="job-date">{{ prev_date }}</span>
+                    </div>
+                    <div class="job-company">{{ prev_company }}</div>
+                    <div class="job-desc">{{ prev_desc }}</div>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <div class="section-title">Core Competencies</div>
+                <div class="tag-cloud">
+                    {% for skill in skills %}
+                    <span class="tag">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

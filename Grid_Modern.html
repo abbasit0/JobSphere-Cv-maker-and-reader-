@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }} - CV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Base Settings */
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: #eef2f6; 
+            padding: 40px 0; 
+            margin: 0; 
+            color: #334155; 
+            /* Fixed: Added standard property to clear VS Code warning */
+            -webkit-print-color-adjust: exact; 
+            print-color-adjust: exact;
+        }
+        
+        .resume-container { 
+            width: 210mm; 
+            margin: 0 auto; 
+            background: white; 
+            min-height: 297mm; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Decorative Top Bar */
+        .resume-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 12px;
+            background: linear-gradient(90deg, #4f46e5, #06b6d4);
+        }
+        
+        /* Header Section */
+        .header { 
+            padding: 50px 50px 40px; 
+            display: grid; 
+            grid-template-columns: 130px 1fr auto; 
+            gap: 30px; 
+            align-items: center; 
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .header-img { 
+            width: 130px; 
+            height: 130px; 
+            object-fit: cover; 
+            border-radius: 50%; 
+            border: 4px solid #fff;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2); 
+        }
+        
+        .name-area h1 { 
+            margin: 0; 
+            font-family: 'Outfit', sans-serif; 
+            font-size: 42px; 
+            font-weight: 800; 
+            color: #0f172a; 
+            line-height: 1.1;
+        }
+        
+        .name-area h2 { 
+            margin: 8px 0 0; 
+            font-size: 16px; 
+            font-weight: 600; 
+            color: #4f46e5; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            background: #e0e7ff;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+        }
+        
+        .contact-area { 
+            text-align: right; 
+            font-size: 13px; 
+            color: #64748b; 
+            line-height: 1.9; 
+            border-left: 2px solid #f1f5f9;
+            padding-left: 20px;
+        }
+        .contact-area strong { color: #0f172a; font-weight: 700; }
+        
+        /* Main Content */
+        .content-padding { padding: 40px 50px; }
+
+        .section { margin-bottom: 35px; }
+        
+        .section-header { 
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            color: #94a3b8; 
+            margin-bottom: 25px; 
+            display: flex;
+            align-items: center;
+        }
+
+        .section-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+            margin-left: 15px;
+        }
+        
+        .summary-block { 
+            background: #f8fafc; 
+            border-left: 4px solid #4f46e5; 
+            padding: 20px 25px; 
+            border-radius: 0 8px 8px 0;
+            font-size: 14px; 
+            line-height: 1.8; 
+            color: #475569; 
+            font-style: italic;
+        }
+
+        /* Timeline / Grid */
+        .content-grid { display: grid; grid-template-columns: 140px 1fr; gap: 25px; }
+        
+        .date-col { 
+            font-size: 13px; 
+            color: #64748b; 
+            font-weight: 600; 
+            text-align: right; 
+            padding-top: 5px; 
+        }
+        
+        .main-col { 
+            position: relative;
+            padding-bottom: 25px;
+        }
+
+        /* Connecting Line */
+        .main-col::before {
+            content: '';
+            position: absolute;
+            left: -14px;
+            top: 8px;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+        }
+        .main-col:last-child::before { display: none; }
+        
+        /* Timeline Dot */
+        .main-col::after {
+            content: '';
+            position: absolute;
+            left: -19px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3px solid #4f46e5;
+        }
+        
+        .item-title { font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; color: #1e293b; }
+        .item-subtitle { font-size: 14px; color: #4f46e5; font-weight: 600; margin-bottom: 8px; display: block; }
+        .item-desc { font-size: 14px; color: #475569; line-height: 1.6; margin-top: 5px; }
+        
+        .gpa-tag { 
+            display: inline-block; 
+            background: #ecfccb; 
+            color: #3f6212; 
+            padding: 4px 10px; 
+            border-radius: 20px; 
+            font-size: 12px; 
+            font-weight: 700; 
+            margin-top: 8px; 
+            border: 1px solid #d9f99d;
+        }
+
+        /* Skills */
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-box { 
+            background: #fff; 
+            border: 1px solid #e2e8f0; 
+            padding: 8px 16px; 
+            border-radius: 6px; 
+            font-weight: 600; 
+            font-size: 13px; 
+            color: #334155; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02); 
+            transition: all 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <header class="header">
+            <img src="{{ filename }}" alt="Profile Picture" style="width: 130px; height: 130px; object-fit: cover; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2); display: block;">
+            
+            <div class="name-area">
+                <h1>{{ name }}</h1>
+                <h2>{{ job_title }}</h2>
+            </div>
+            <div class="contact-area">
+                <div><strong>Email:</strong> {{ email }}</div>
+                <div><strong>Phone:</strong> {{ phone }}</div>
+                <div><strong>Location:</strong> {{ city }}</div>
+            </div>
+        </header>
+
+        <div class="content-padding">
+            <div class="section">
+                <div class="section-header">About Candidate</div>
+                <div class="summary-block">{{ summary }}</div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">Work History</div>
+                <div class="content-grid">
+                    <div class="date-col">{{ current_date }}</div>
+                    <div class="main-col">
+                        <div class="item-title">{{ job_title }}</div>
+                        <span class="item-subtitle">Current Company</span>
+                        <div class="item-desc">
+                            Currently serving as a {{ level }} professional. Leveraging {{ years_exp }} years of total industry experience to drive results.
+                        </div>
+                    </div>
+
+                    <div class="date-col">{{ prev_date }}</div>
+                    <div class="main-col" style="border: none;">
+                        <div class="item-title">{{ prev_title }}</div>
+                        <span class="item-subtitle">{{ prev_company }}</span>
+                        <div class="item-desc">{{ prev_desc }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">Education</div>
+                <div class="content-grid">
+                    <div class="date-col">Graduated</div>
+                    <div class="main-col" style="border: none;">
+                        <div class="item-title">{{ degree }}</div>
+                        <span class="item-subtitle">{{ university }}</span><br>
+                        <span class="gpa-tag">CGPA: {{ gpa }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">Technical Arsenal</div>
+                <div class="skills-grid">
+                    {% for skill in skills %}
+                    <div class="skill-box">{{ skill }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
